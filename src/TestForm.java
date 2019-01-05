@@ -70,14 +70,16 @@ public class TestForm extends JFrame {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         TestForm testForm = new TestForm();
         //sql連接
-        //String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+        String JDBC_DRIVER = "com.mysql.jdbc.Driver";
         //配置mySql url
         String url = "jdbc:mysql://localhost:3306/oose_final";
         String user = "root";
         String password = "123456";
-        Class.forName("com.mysql.jdbc.Driver");
-
+        //加載驅動程序
+        Class.forName(JDBC_DRIVER);
+        //創建連接
         Connection connection = DriverManager.getConnection(url,user,password);
+        //創建statement對象來執行sql語句
         Statement statement =connection.createStatement();
 
         testForm.InitialInformationButton.addActionListener(new ActionListener() {
@@ -93,7 +95,9 @@ public class TestForm extends JFrame {
                     +testForm.TotalMoneyText.getText());
                     String sql ="INSERT INTO userinitialinformation VALUES ("+"\'"+testForm.getUserName()+"\',"+testForm.getTotalMoney()+")";
                     try {
+                        //將姓名和總金額存入資料庫
                         statement.executeUpdate(sql);
+                        //關閉資料庫，保證只能存入一次
                         statement.close();
                         connection.close();
                     } catch (SQLException e1) {
@@ -106,18 +110,7 @@ public class TestForm extends JFrame {
         });
 
 
-        //將按鈕實作放入main中
-
     }
 
-    /*private static Connection getConnection() throws SQLException, ClassNotFoundException {
-        final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-        //配置mySql url
-        final String url = "jdbc:mysql://localhost:3306/oose_final";
-        final String user = "root";
-        final String password = "123456";
-        Class.forName(JDBC_DRIVER);
-        return DriverManager.getConnection(url,user,password);
-    }*/
 
 }
