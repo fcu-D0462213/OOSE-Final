@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.util.Scanner;
 
 public class MoneyManage extends ManageSystem {
-    String UserName="123";
+    String UserName;
 
     public String getUserName() {
         return UserName;
@@ -14,7 +14,7 @@ public class MoneyManage extends ManageSystem {
 
     @Override
     public void inputInitialInfo(String userName) {
-        System.out.println(userName);
+        System.out.println("用戶姓名為："+userName);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class MoneyManage extends ManageSystem {
 
     }
 
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
         ManageSystem moneyManage = new MoneyManage();
         TestForm testForm = new TestForm();
         JFrame frame = new JFrame("TestForm");
@@ -66,8 +66,5 @@ public class MoneyManage extends ManageSystem {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-        //System.out.println(testForm.getUserName());
-        //moneyManage.inputInitialInfo(testForm.userName);
-        //moneyManage.PutInformation();
-    }
+    }*/
 }

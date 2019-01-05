@@ -50,7 +50,7 @@ public class TestForm extends JFrame {
 
     public TestForm() {
         super("Test");
-        NameButton.addActionListener(new ActionListener() {
+        /*NameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //userName = NameText.getText();
@@ -60,7 +60,7 @@ public class TestForm extends JFrame {
 
                 //System.out.println(userName);
             }
-        });
+        });*/
         setContentPane(Panel1);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
@@ -68,13 +68,16 @@ public class TestForm extends JFrame {
     }
 
     public static void main(String[] args) {
-        //String username;
         TestForm testForm = new TestForm();
-        //username=testForm.NameText.getText();
+        ManageSystem moneyManage = new MoneyManage();
+        //將按鈕實作放入main中
         testForm.NameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                testForm.setUserName(testForm.NameText.getText());
+                testForm.NameOutputLabel.setText("您的姓名為：" + testForm.NameText.getText());
                 System.out.println("main里的username："+testForm.getUserName());
+                moneyManage.inputInitialInfo(testForm.getUserName());
             }
         });
     }
