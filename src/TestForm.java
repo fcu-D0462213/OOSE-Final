@@ -9,17 +9,20 @@ import javax.swing.text.Document;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Observer;
 
 public class TestForm extends JFrame {
-    public JPanel Panel1;
+    private JPanel Panel1;
     private JButton OutputButton;
     private JPanel Panel2;
     private JTextField NameText;
-    public JButton NameButton;
     private JLabel NameLabel;
     private JLabel TotalMoneyLabel;
-    private JButton TotalMoneyButton;
+    private JButton InitialInformationButton;
     private JTextField TotalMoneyText;
     private JLabel ItemNameLabel;
     private JTextField ItemNameText;
@@ -35,10 +38,18 @@ public class TestForm extends JFrame {
     private JLabel CategoryLabel;
     private JLabel PriorityLabel;
     private JPanel Panel3;
-    private JLabel NameOutputLabel;
-    private JLabel TotalMoneyOutputLabel;
+    private JLabel InitialInformantionOutputLabel;
     private JLabel ItemOutputLabel;
     private String userName;
+    private double TotalMoney;
+
+    public double getTotalMoney() {
+        return TotalMoney;
+    }
+
+    public void setTotalMoney(double totalMoney) {
+        TotalMoney = totalMoney;
+    }
 
     public String getUserName() {
         return userName;
@@ -50,36 +61,63 @@ public class TestForm extends JFrame {
 
     public TestForm() {
         super("Test");
-        /*NameButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //userName = NameText.getText();
-                setUserName(NameText.getText());
-                System.out.println("内部里的username："+getUserName());
-                NameOutputLabel.setText("        您的姓名為：" + NameText.getText());
-
-                //System.out.println(userName);
-            }
-        });*/
         setContentPane(Panel1);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setVisible(true);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
         TestForm testForm = new TestForm();
-        ManageSystem moneyManage = new MoneyManage();
-        //將按鈕實作放入main中
-        testForm.NameButton.addActionListener(new ActionListener() {
+        //sql連接
+        //String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+        //配置mySql url
+        String url = "jdbc:mysql://localhost:3306/oose_final";
+        String user = "root";
+        String password = "123456";
+        Class.forName("com.mysql.jdbc.Driver");
+
+        Connection connection = DriverManager.getConnection(url,user,password);
+        Statement statement =connection.createStatement();
+
+        testForm.InitialInformationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                testForm.setUserName(testForm.NameText.getText());
-                testForm.NameOutputLabel.setText("您的姓名為：" + testForm.NameText.getText());
-                System.out.println("main里的username："+testForm.getUserName());
-                moneyManage.inputInitialInfo(testForm.getUserName());
+                if (testForm.NameText.getText().isEmpty()||testForm.TotalMoneyText.getText().isEmpty()){
+                    testForm.InitialInformantionOutputLabel.setText("您有信息還未輸入！請重新輸入！");
+                    //System.out.println("您有信息還未輸入！請重新輸入！");
+                }else {
+                    testForm.setUserName(testForm.NameText.getText());
+                    testForm.setTotalMoney(Double.parseDouble(testForm.TotalMoneyText.getText()));
+                    testForm.InitialInformantionOutputLabel.setText("您的姓名為："+testForm.NameText.getText()+"，您的輸入的總金額為："
+                    +testForm.TotalMoneyText.getText());
+                    String sql ="INSERT INTO userinitialinformation VALUES ("+"\'"+testForm.getUserName()+"\',"+testForm.getTotalMoney()+")";
+                    try {
+                        statement.executeUpdate(sql);
+                        statement.close();
+                        connection.close();
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    }
+
+                    //System.out.println("username:"+testForm.getUserName()+"，Money:"+testForm.getTotalMoney());
+                }
             }
         });
+
+
+        //將按鈕實作放入main中
+
     }
+
+    /*private static Connection getConnection() throws SQLException, ClassNotFoundException {
+        final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+        //配置mySql url
+        final String url = "jdbc:mysql://localhost:3306/oose_final";
+        final String user = "root";
+        final String password = "123456";
+        Class.forName(JDBC_DRIVER);
+        return DriverManager.getConnection(url,user,password);
+    }*/
 
 }

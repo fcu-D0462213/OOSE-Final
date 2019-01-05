@@ -58,13 +58,8 @@ public class MoneyManage extends ManageSystem {
 
     }
 
-/*    public static void main(String[] args) {
+    public static void main(String[] args) {
         ManageSystem moneyManage = new MoneyManage();
-        TestForm testForm = new TestForm();
-        JFrame frame = new JFrame("TestForm");
-        frame.setContentPane(testForm.Panel1);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-    }*/
+        moneyManage.PutInformation();
+    }
 }
