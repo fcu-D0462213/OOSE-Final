@@ -22,7 +22,6 @@ public class TestForm extends JFrame {
     private JRadioButton PriorityRadioButton1;
     private JRadioButton PriorityRadioButton2;
     private JRadioButton PriorityRadioButton3;
-    private JButton ContinueButton;
     private JButton FinishButton;
     private JLabel CategoryLabel;
     private JLabel PriorityLabel;
@@ -62,6 +61,7 @@ public class TestForm extends JFrame {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         TestForm testForm = new TestForm();
         ManageSystem moneyManage = new MoneyManage();
+
         //輸入信息按鈕實作
         testForm.InitialInformationButton.addActionListener(new ActionListener() {
             @Override
@@ -72,26 +72,27 @@ public class TestForm extends JFrame {
                 }else {
                     moneyManage.inputInitialInfo(testForm.NameText.getText(),Double.parseDouble(testForm.TotalMoneyText.getText()));
                     testForm.InitialInformationOutputLabel.setText("您的姓名為："+testForm.NameText.getText()+"，您的輸入的總金額為："
-                    +testForm.TotalMoneyText.getText());
+                    +testForm.TotalMoneyText.getText()+"元");
                 }
             }
         });
+
         //輸入物件按鈕實作
         testForm.ItemOutputButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (testForm.ItemNameText.getText().isEmpty()){
                     testForm.ItemOutputLabel.setText("開銷名稱未輸入！");
-                    System.out.println("開銷名稱未輸入！");
+                    //System.out.println("開銷名稱未輸入！");
                 }else if (testForm.ItemMoneyText.getText().isEmpty()){
                     testForm.ItemOutputLabel.setText("開銷金額未輸入！");
-                    System.out.println("開銷金額未輸入！");
+                    //System.out.println("開銷金額未輸入！");
                 }else if (testForm.checkRationButton(testForm.CategoryRadioButton1,testForm.CategoryRadioButton2,testForm.CategoryRadioButton3)==false){
                     testForm.ItemOutputLabel.setText("開銷種類未選擇！");
-                    System.out.println("開銷種類未選擇！");
+                    //System.out.println("開銷種類未選擇！");
                 }else if (testForm.checkRationButton(testForm.PriorityRadioButton1,testForm.PriorityRadioButton2,testForm.PriorityRadioButton3)==false){
                     testForm.ItemOutputLabel.setText("開銷優先度未選擇！");
-                    System.out.println("開銷優先度未選擇！");
+                    //System.out.println("開銷優先度未選擇！");
                 }else {
                     testForm.ItemOutputLabel.setText("您輸入的開銷名稱為："+testForm.ItemNameText.getText()+"，該物品開銷為："+testForm.ItemMoneyText.getText()
                             +"元，該物品的種類為："+testForm.selectRadioButton(testForm.CategoryRadioButton1,testForm.CategoryRadioButton2,testForm.CategoryRadioButton3).getText()
@@ -100,6 +101,7 @@ public class TestForm extends JFrame {
             }
         });
 
+        //加入item按钮实作
         testForm.ConfirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -112,22 +114,31 @@ public class TestForm extends JFrame {
                     moneyManage.addItem(testForm.ItemNameText.getText(),Double.parseDouble(testForm.ItemMoneyText.getText()),
                             moneyManage.chooseCategory(testForm.selectRadioButton(testForm.CategoryRadioButton1,testForm.CategoryRadioButton2,testForm.CategoryRadioButton3).getText()),
                             moneyManage.choosePriority(testForm.selectRadioButton(testForm.PriorityRadioButton1,testForm.PriorityRadioButton2,testForm.PriorityRadioButton3).getText()));
-                    //((MoneyManage) moneyManage).moneyItems.add(new Item(testForm.ItemNameText.getText(),))
-                    //testForm.ItemOutputLabel.setText("ok");
-                    //System.out.println("ok!");
                 }
             }
         });
+
+        //finish按钮实作
+       testForm.FinishButton.addActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+                   System.out.println("--------當前用戶信息----------");
+                   System.out.println("姓名:"+((MoneyManage) moneyManage).getUserName()+",金錢總量:"+((MoneyManage) moneyManage).getTotalMoney()+"元");
+                   Iterator<Item> itemIterator = ((MoneyManage) moneyManage).moneyItems.iterator();
+                   System.out.println("--------規劃開銷項目---------");
+                   while (itemIterator.hasNext()) {
+                       Item moneyItem = itemIterator.next();
+                       System.out.println("開銷名稱：" + moneyItem.getItemName() + ",所需金錢:" + moneyItem.getCost() + "元,開銷種類:" + moneyItem.backCategory() + ",開銷優先度:" +
+                               moneyItem.backPriority());
+               }
+           }
+       });
+
+        //output按钮实作
         testForm.OutputButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("user name:"+((MoneyManage) moneyManage).getUserName()+",user money:"+((MoneyManage) moneyManage).getTotalMoney());
-                Iterator<Item> itemIterator = ((MoneyManage) moneyManage).moneyItems.iterator();
-                while (itemIterator.hasNext()){
-                    Item moneyItem = itemIterator.next();
-                    System.out.println("itemName:"+moneyItem.getItemName()+",itemMoney:"+moneyItem.getCost()+",category:"+moneyItem.getCategory()+",priority:"+
-                            moneyItem.getPriority());
-                }
+                moneyManage.InformantionOutput(((MoneyManage) moneyManage).getUserName(),((MoneyManage) moneyManage).getTotalMoney());
             }
         });
     }

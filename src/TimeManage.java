@@ -21,10 +21,6 @@ public class TimeManage extends ManageSystem {
 
     }
 
-    @Override
-    public boolean askContinue() {
-        return false;
-    }
 
     @Override
     public void output() {

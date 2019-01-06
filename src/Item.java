@@ -15,32 +15,36 @@ public class Item implements Comparable{
         return itemName;
     }
 
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
-
     public double getCost() {
         return cost;
-    }
-
-    public void setCost(double cost) {
-        this.cost = cost;
     }
 
     public int getCategory() {
         return category;
     }
 
-    public void setCategory(int category) {
-        this.category = category;
-    }
-
     public int getPriority() {
         return priority;
     }
 
-    public void setPriority(int priority) {
-        this.priority = priority;
+    public String backCategory(){
+        if (getCategory()==3){
+            return "固定必要開銷";
+        }else if (getCategory()==2){
+            return "靈活必要開銷";
+        }else {
+            return "自由支配開銷";
+        }
+    }
+
+    public String backPriority(){
+        if (getPriority()==3){
+            return "重要";
+        }else if (getPriority()==2){
+            return "次要";
+        }else {
+            return "不重要";
+        }
     }
 
     //重寫比較
@@ -49,12 +53,12 @@ public class Item implements Comparable{
 
         Item item = (Item) o;
         if (this.getCategory()>item.getCategory()){
-            return 1;
+            return -1;
         }else if (this.getCategory()==item.getCategory()){
             if (this.getPriority()>item.getPriority()){
-                return 1;
-            }else if (this.getPriority()<item.getPriority()){
                 return -1;
+            }else if (this.getPriority()<item.getPriority()){
+                return 1;
             }else {
                 if (this.getItemName().compareTo(item.getItemName())==0&&this.getCost()==item.getCost()){
                     return 0;
@@ -63,7 +67,7 @@ public class Item implements Comparable{
                 }
             }
         }else {
-            return -1;
+            return 1;
         }
     }
 }
