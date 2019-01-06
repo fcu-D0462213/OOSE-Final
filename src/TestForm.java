@@ -26,29 +26,11 @@ public class TestForm extends JFrame {
     private JLabel CategoryLabel;
     private JLabel PriorityLabel;
     private JPanel Panel3;
-    private JLabel InitialInformantionOutputLabel;
+    private JLabel InitialInformationOutputLabel;
     private JLabel ItemOutputLabel;
     public JButton ConfirmButton;
     public JLabel ItemMoneyLabel;
     public JTextField ItemMoneyText;
-    private String userName;
-    private double TotalMoney;
-
-    public double getTotalMoney() {
-        return TotalMoney;
-    }
-
-    public void setTotalMoney(double totalMoney) {
-        TotalMoney = totalMoney;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public TestForm() {
         super("Test");
@@ -77,6 +59,7 @@ public class TestForm extends JFrame {
     }
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         TestForm testForm = new TestForm();
+        ManageSystem moneymanage = new MoneyManage();
         //sql連接
         String JDBC_DRIVER = "com.mysql.jdbc.Driver";
         //配置mySql url
@@ -89,19 +72,21 @@ public class TestForm extends JFrame {
         Connection connection = DriverManager.getConnection(url,user,password);
         //創建statement對象來執行sql語句
         Statement statement =connection.createStatement();
-
+        //輸入信息按鈕實作
         testForm.InitialInformationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (testForm.NameText.getText().isEmpty()||testForm.TotalMoneyText.getText().isEmpty()){
-                    testForm.InitialInformantionOutputLabel.setText("您有信息還未輸入！請重新輸入！");
+                    testForm.InitialInformationOutputLabel.setText("您有信息還未輸入！請重新輸入！");
                     //System.out.println("您有信息還未輸入！請重新輸入！");
                 }else {
-                    testForm.setUserName(testForm.NameText.getText());
-                    testForm.setTotalMoney(Double.parseDouble(testForm.TotalMoneyText.getText()));
-                    testForm.InitialInformantionOutputLabel.setText("您的姓名為："+testForm.NameText.getText()+"，您的輸入的總金額為："
+                    ((MoneyManage) moneymanage).setUserName(testForm.NameText.getText());
+                    ((MoneyManage) moneymanage).setTotalMoney(Double.parseDouble(testForm.TotalMoneyText.getText()));
+                    //testForm.setUserName(testForm.NameText.getText());
+                    //testForm.setTotalMoney(Double.parseDouble(testForm.TotalMoneyText.getText()));
+                    testForm.InitialInformationOutputLabel.setText("您的姓名為："+testForm.NameText.getText()+"，您的輸入的總金額為："
                     +testForm.TotalMoneyText.getText());
-                    String sql ="INSERT INTO userinitialinformation VALUES ("+"\'"+testForm.getUserName()+"\',"+testForm.getTotalMoney()+")";
+                   /* String sql ="INSERT INTO userinitialinformation VALUES ("+"\'"+testForm.getUserName()+"\',"+testForm.getTotalMoney()+")";
                     try {
                         //將姓名和總金額存入資料庫
                         statement.executeUpdate(sql);
@@ -111,12 +96,13 @@ public class TestForm extends JFrame {
                     } catch (SQLException e1) {
                         System.out.println("只能輸入一次姓名和總金額！");
                         e1.printStackTrace();
-                    }
+                    }*/
 
                     //System.out.println("username:"+testForm.getUserName()+"，Money:"+testForm.getTotalMoney());
                 }
             }
         });
+        //輸入物件按鈕實作
         testForm.ItemOutputButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -137,6 +123,27 @@ public class TestForm extends JFrame {
                             +"元，該物品的種類為："+testForm.selectRadioButton(testForm.CategoryRadioButton1,testForm.CategoryRadioButton2,testForm.CategoryRadioButton3).getText()
                             +", 該物品的優先度為："+testForm.selectRadioButton(testForm.PriorityRadioButton1,testForm.PriorityRadioButton2,testForm.PriorityRadioButton3).getText());
                 }
+            }
+        });
+
+        testForm.ConfirmButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (testForm.ItemNameText.getText().isEmpty()||testForm.ItemMoneyText.getText().isEmpty()||
+                        (testForm.checkRationButton(testForm.CategoryRadioButton1,testForm.CategoryRadioButton2,testForm.CategoryRadioButton3)==false)
+                        || (testForm.checkRationButton(testForm.PriorityRadioButton1,testForm.PriorityRadioButton2,testForm.PriorityRadioButton3)==false)){
+                    testForm.ItemOutputLabel.setText("您還有信息未輸入！");
+                    //System.out.println("您還有信息未輸入！");
+                }else {
+                    //testForm.ItemOutputLabel.setText("ok");
+                    //System.out.println("ok!");
+                }
+            }
+        });
+        testForm.OutputButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("user name:"+((MoneyManage) moneymanage).getUserName()+",user money:"+((MoneyManage) moneymanage).getTotalMoney());
             }
         });
         /*String sql = "SELECT userName,userMoney FROM userinitialinformation";

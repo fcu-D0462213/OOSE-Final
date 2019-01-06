@@ -2,25 +2,29 @@ import javax.swing.*;
 import java.util.Scanner;
 
 public class MoneyManage extends ManageSystem {
-    String UserName;
+    String userName;
+    double totalMoney;
 
     public String getUserName() {
-        return UserName;
+        return userName;
     }
 
     public void setUserName(String userName) {
-        UserName = userName;
+        this.userName = userName;
+    }
+
+    public double getTotalMoney() {
+        return totalMoney;
+    }
+
+    public void setTotalMoney(double totalMoney) {
+        this.totalMoney = totalMoney;
     }
 
     @Override
-    public void inputInitialInfo(String userName) {
-        System.out.println("用戶姓名為："+userName);
-    }
-
-    @Override
-    public void inputName() {
-        System.out.println("input name");
-
+    public void inputInitialInfo(String userName, Double totalMoney) {
+        setUserName(userName);
+        setTotalMoney(totalMoney);
     }
 
     @Override

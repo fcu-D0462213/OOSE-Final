@@ -19,7 +19,7 @@ abstract class ManageSystem {
             System.out.println("輸入錯誤，請重新輸入！");
         }*/
         while(flag=askContinue()){
-            inputName();
+            //inputName();
             chooseCategory();
             choosePriority();
             //flag=askContinue();
@@ -27,8 +27,8 @@ abstract class ManageSystem {
         output();
 
     }
-    public abstract void inputInitialInfo(String userName);//输入初始信息
-    public abstract void inputName();//加入事件名稱
+    public abstract void inputInitialInfo(String userName,Double totalMoney);//输入初始信息
+    //public abstract void inputName();//加入事件名稱
     public abstract void chooseCategory();//選擇分類
     public abstract void choosePriority();//選擇優先度
     public abstract boolean askContinue();//詢問是否添加

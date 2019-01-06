@@ -903,14 +903,33 @@
       <Charset>utf8mb4</Charset>
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
-    <table id="227" parent="4" name="userinitialinformation"/>
-    <column id="228" parent="227" name="userName">
+    <table id="227" parent="4" name="iteminformation"/>
+    <table id="228" parent="4" name="userinitialinformation"/>
+    <column id="229" parent="227" name="itemName">
       <Position>1</Position>
       <DataType>varchar(128)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="229" parent="227" name="userMoney">
+    <column id="230" parent="227" name="itemCategory">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="231" parent="227" name="itemPriority">
+      <Position>3</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="232" parent="228" name="userName">
+      <Position>1</Position>
+      <DataType>varchar(128)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="233" parent="228" name="userMoney">
       <Position>2</Position>
       <DataType>double|0s</DataType>
       <NotNull>1</NotNull>

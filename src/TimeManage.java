@@ -1,12 +1,8 @@
 public class TimeManage extends ManageSystem {
 
-    @Override
-    public void inputInitialInfo(String userName) {
-
-    }
 
     @Override
-    public void inputName() {
+    public void inputInitialInfo(String userName, Double totalMoney) {
 
     }
 
