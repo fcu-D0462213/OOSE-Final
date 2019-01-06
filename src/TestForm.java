@@ -1,16 +1,7 @@
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
-import java.util.Observer;
 
 public class TestForm extends JFrame {
     private JPanel Panel1;
@@ -38,6 +29,8 @@ public class TestForm extends JFrame {
     private JLabel InitialInformantionOutputLabel;
     private JLabel ItemOutputLabel;
     public JButton ConfirmButton;
+    public JLabel ItemMoneyLabel;
+    public JTextField ItemMoneyText;
     private String userName;
     private double TotalMoney;
 
@@ -64,7 +57,24 @@ public class TestForm extends JFrame {
         pack();
         setVisible(true);
     }
-
+    //選擇RadioButton
+    public JRadioButton selectRadioButton(JRadioButton rb1,JRadioButton rb2,JRadioButton rb3){
+        if (rb1.isSelected()){
+            return rb1;
+        }else if (rb2.isSelected()){
+            return rb2;
+        }else {
+            return rb3;
+        }
+    }
+    //判斷RadioButton是否被選中
+    public boolean checkRationButton(JRadioButton rb1,JRadioButton rb2,JRadioButton rb3){
+        if ((rb1.isSelected()||rb2.isSelected()||rb3.isSelected())==false){
+            return false;
+        }else {
+            return true;
+        }
+    }
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         TestForm testForm = new TestForm();
         //sql連接
@@ -104,6 +114,28 @@ public class TestForm extends JFrame {
                     }
 
                     //System.out.println("username:"+testForm.getUserName()+"，Money:"+testForm.getTotalMoney());
+                }
+            }
+        });
+        testForm.ItemOutputButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (testForm.ItemNameText.getText().isEmpty()){
+                    testForm.ItemOutputLabel.setText("開銷名稱未輸入！");
+                    System.out.println("開銷名稱未輸入！");
+                }else if (testForm.ItemMoneyText.getText().isEmpty()){
+                    testForm.ItemOutputLabel.setText("開銷金額未輸入！");
+                    System.out.println("開銷金額未輸入！");
+                }else if (testForm.checkRationButton(testForm.CategoryRadioButton1,testForm.CategoryRadioButton2,testForm.CategoryRadioButton3)==false){
+                    testForm.ItemOutputLabel.setText("開銷種類未選擇！");
+                    System.out.println("開銷種類未選擇！");
+                }else if (testForm.checkRationButton(testForm.PriorityRadioButton1,testForm.PriorityRadioButton2,testForm.PriorityRadioButton3)==false){
+                    testForm.ItemOutputLabel.setText("開銷優先度未選擇！");
+                    System.out.println("開銷優先度未選擇！");
+                }else {
+                    testForm.ItemOutputLabel.setText("您輸入的開銷名稱為："+testForm.ItemNameText.getText()+"，該物品開銷為："+testForm.ItemMoneyText.getText()
+                            +"元，該物品的種類為："+testForm.selectRadioButton(testForm.CategoryRadioButton1,testForm.CategoryRadioButton2,testForm.CategoryRadioButton3).getText()
+                            +", 該物品的優先度為："+testForm.selectRadioButton(testForm.PriorityRadioButton1,testForm.PriorityRadioButton2,testForm.PriorityRadioButton3).getText());
                 }
             }
         });
