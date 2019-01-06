@@ -16,6 +16,10 @@ public class TimeManage extends ManageSystem {
         return 0;
     }
 
+    @Override
+    public void addItem(String itemName, double cost, int category, int priority) {
+
+    }
 
     @Override
     public boolean askContinue() {

@@ -54,6 +54,11 @@ public class MoneyManage extends ManageSystem {
         return virtualPriority;
     }
 
+    @Override
+    public void addItem(String itemName, double cost, int category, int priority) {
+        Item item = new Item(itemName,cost,category,priority);
+        moneyItems.add(item);
+    }
 
     @Override
     public boolean askContinue() {

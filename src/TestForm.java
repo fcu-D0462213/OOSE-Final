@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.util.Iterator;
 
 public class TestForm extends JFrame {
     private JPanel Panel1;
@@ -57,6 +58,7 @@ public class TestForm extends JFrame {
             return true;
         }
     }
+
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         TestForm testForm = new TestForm();
         ManageSystem moneyManage = new MoneyManage();
@@ -107,7 +109,10 @@ public class TestForm extends JFrame {
                     testForm.ItemOutputLabel.setText("您還有信息未輸入！");
                     //System.out.println("您還有信息未輸入！");
                 }else {
-
+                    moneyManage.addItem(testForm.ItemNameText.getText(),Double.parseDouble(testForm.ItemMoneyText.getText()),
+                            moneyManage.chooseCategory(testForm.selectRadioButton(testForm.CategoryRadioButton1,testForm.CategoryRadioButton2,testForm.CategoryRadioButton3).getText()),
+                            moneyManage.choosePriority(testForm.selectRadioButton(testForm.PriorityRadioButton1,testForm.PriorityRadioButton2,testForm.PriorityRadioButton3).getText()));
+                    //((MoneyManage) moneyManage).moneyItems.add(new Item(testForm.ItemNameText.getText(),))
                     //testForm.ItemOutputLabel.setText("ok");
                     //System.out.println("ok!");
                 }
@@ -117,6 +122,12 @@ public class TestForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("user name:"+((MoneyManage) moneyManage).getUserName()+",user money:"+((MoneyManage) moneyManage).getTotalMoney());
+                Iterator<Item> itemIterator = ((MoneyManage) moneyManage).moneyItems.iterator();
+                while (itemIterator.hasNext()){
+                    Item moneyItem = itemIterator.next();
+                    System.out.println("itemName:"+moneyItem.getItemName()+",itemMoney:"+moneyItem.getCost()+",category:"+moneyItem.getCategory()+",priority:"+
+                            moneyItem.getPriority());
+                }
             }
         });
     }

@@ -56,10 +56,10 @@ public class Item implements Comparable{
             }else if (this.getPriority()<item.getPriority()){
                 return -1;
             }else {
-                if (this.getItemName().equals(item.getItemName())&&this.getCost()==item.getCost()){
+                if (this.getItemName().compareTo(item.getItemName())==0&&this.getCost()==item.getCost()){
                     return 0;
                 }else {
-                    return this.getItemName().compareTo(item.getItemName());
+                    return -1;
                 }
             }
         }else {
