@@ -1,9 +1,9 @@
 import javax.swing.*;
-import java.util.Scanner;
+import java.util.*;
 
 public class MoneyManage extends ManageSystem {
-    String userName;
-    double totalMoney;
+    private String userName;
+    private double totalMoney;
 
     public String getUserName() {
         return userName;
@@ -28,16 +28,31 @@ public class MoneyManage extends ManageSystem {
     }
 
     @Override
-    public void chooseCategory() {
-        System.out.println("choose Category");
-
+    public int chooseCategory(String category) {
+        int virtualCategory;
+        if (category.equals("固定必要開銷")){
+            virtualCategory = 3;
+        }else if (category.equals("靈活必要開銷")){
+            virtualCategory = 2;
+        }else {
+            virtualCategory = 1;
+        }
+        return virtualCategory;
     }
 
     @Override
-    public void choosePriority() {
-        System.out.println("choose Priority");
-
+    public int choosePriority(String priority) {
+        int virtualPriority;
+        if (priority.equals("重要")) {
+            virtualPriority = 3;
+        }else if (priority.equals("次要")){
+            virtualPriority = 2;
+        }else {
+            virtualPriority = 1;
+        }
+        return virtualPriority;
     }
+
 
     @Override
     public boolean askContinue() {
@@ -46,11 +61,11 @@ public class MoneyManage extends ManageSystem {
         //詢問是否添加物件
         System.out.println("是否添加需要购买的物件(Yes/No):");
         decision = scanner.nextLine();
-        if (decision.equals("Yes")||decision.equals("yes")){
+        if (decision.equals("Yes") || decision.equals("yes")) {
             return true;
-        }else if (decision.equals("No")||decision.equals("no")){
+        } else if (decision.equals("No") || decision.equals("no")) {
             return false;
-        }else {
+        } else {
             System.out.println("輸入錯誤！");
             return false;
         }

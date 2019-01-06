@@ -7,14 +7,15 @@ public class TimeManage extends ManageSystem {
     }
 
     @Override
-    public void chooseCategory() {
-
+    public int chooseCategory(String category) {
+        return 0;
     }
 
     @Override
-    public void choosePriority() {
-
+    public int choosePriority(String priority) {
+        return 0;
     }
+
 
     @Override
     public boolean askContinue() {

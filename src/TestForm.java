@@ -59,19 +59,7 @@ public class TestForm extends JFrame {
     }
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         TestForm testForm = new TestForm();
-        ManageSystem moneymanage = new MoneyManage();
-        //sql連接
-        String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-        //配置mySql url
-        String url = "jdbc:mysql://localhost:3306/oose_final";
-        String user = "root";
-        String password = "123456";
-        //加載驅動程序
-        Class.forName(JDBC_DRIVER);
-        //創建連接
-        Connection connection = DriverManager.getConnection(url,user,password);
-        //創建statement對象來執行sql語句
-        Statement statement =connection.createStatement();
+        ManageSystem moneyManage = new MoneyManage();
         //輸入信息按鈕實作
         testForm.InitialInformationButton.addActionListener(new ActionListener() {
             @Override
@@ -80,25 +68,9 @@ public class TestForm extends JFrame {
                     testForm.InitialInformationOutputLabel.setText("您有信息還未輸入！請重新輸入！");
                     //System.out.println("您有信息還未輸入！請重新輸入！");
                 }else {
-                    ((MoneyManage) moneymanage).setUserName(testForm.NameText.getText());
-                    ((MoneyManage) moneymanage).setTotalMoney(Double.parseDouble(testForm.TotalMoneyText.getText()));
-                    //testForm.setUserName(testForm.NameText.getText());
-                    //testForm.setTotalMoney(Double.parseDouble(testForm.TotalMoneyText.getText()));
+                    moneyManage.inputInitialInfo(testForm.NameText.getText(),Double.parseDouble(testForm.TotalMoneyText.getText()));
                     testForm.InitialInformationOutputLabel.setText("您的姓名為："+testForm.NameText.getText()+"，您的輸入的總金額為："
                     +testForm.TotalMoneyText.getText());
-                   /* String sql ="INSERT INTO userinitialinformation VALUES ("+"\'"+testForm.getUserName()+"\',"+testForm.getTotalMoney()+")";
-                    try {
-                        //將姓名和總金額存入資料庫
-                        statement.executeUpdate(sql);
-                        //關閉資料庫，保證只能存入一次
-                        statement.close();
-                        //connection.close();
-                    } catch (SQLException e1) {
-                        System.out.println("只能輸入一次姓名和總金額！");
-                        e1.printStackTrace();
-                    }*/
-
-                    //System.out.println("username:"+testForm.getUserName()+"，Money:"+testForm.getTotalMoney());
                 }
             }
         });
@@ -135,6 +107,7 @@ public class TestForm extends JFrame {
                     testForm.ItemOutputLabel.setText("您還有信息未輸入！");
                     //System.out.println("您還有信息未輸入！");
                 }else {
+
                     //testForm.ItemOutputLabel.setText("ok");
                     //System.out.println("ok!");
                 }
@@ -143,17 +116,9 @@ public class TestForm extends JFrame {
         testForm.OutputButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("user name:"+((MoneyManage) moneymanage).getUserName()+",user money:"+((MoneyManage) moneymanage).getTotalMoney());
+                System.out.println("user name:"+((MoneyManage) moneyManage).getUserName()+",user money:"+((MoneyManage) moneyManage).getTotalMoney());
             }
         });
-        /*String sql = "SELECT userName,userMoney FROM userinitialinformation";
-        ResultSet rs = statement.executeQuery(sql);
-        while (rs.next()){
-            String name = rs.getString("userName");
-            double money = rs.getDouble("userMoney");
-            System.out.println("name:"+name+" money:"+money);
-        }*///读取数据模板
-
     }
 
 
