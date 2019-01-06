@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="TestForm">
-  <grid id="27dc6" binding="Panel1" layout-manager="GridLayoutManager" row-count="10" column-count="5" same-size-horizontally="true" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="Panel1" layout-manager="GridLayoutManager" row-count="10" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="65" y="4" width="794" height="415"/>
@@ -108,7 +108,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="选择開銷种类"/>
+          <text value="选择開銷类別"/>
         </properties>
       </component>
       <component id="7b34d" class="javax.swing.JRadioButton" binding="CategoryRadioButton1">
@@ -251,6 +251,11 @@
       <member id="84f5e"/>
       <member id="e8055"/>
       <member id="98f40"/>
+    </group>
+    <group name="buttonGroup3">
+      <member id="ce91b"/>
+      <member id="90e91"/>
+      <member id="c1db"/>
     </group>
   </buttonGroups>
 </form>

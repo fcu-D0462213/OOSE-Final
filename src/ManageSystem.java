@@ -2,8 +2,8 @@ import java.util.Scanner;
 
 abstract class ManageSystem {
 
-    final void InformantionOutput(String userName,Double totalMoney){
-        System.out.println("用戶"+userName+"的規劃表如下：");
+    final void InformationOutput(String userName,Double totalMoney){
+        System.out.println("-----------用戶"+userName+"的規劃表如下----------");
         output();
     }
     public abstract void inputInitialInfo(String userName,Double totalMoney);//输入初始信息

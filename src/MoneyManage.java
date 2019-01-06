@@ -1,3 +1,4 @@
+import java.util.Iterator;
 import java.util.TreeSet;
 public class MoneyManage extends ManageSystem {
     private String userName=null;
@@ -52,6 +53,7 @@ public class MoneyManage extends ManageSystem {
         return virtualPriority;
     }
 
+
     @Override
     public void addItem(String itemName, double cost, int category, int priority) {
         Item item = new Item(itemName,cost,category,priority);
@@ -60,7 +62,22 @@ public class MoneyManage extends ManageSystem {
 
     @Override
     public void output() {
-        System.out.println("Output");
+        double sum = 0;
+        Iterator<Item> itemIterator = moneyItems.iterator();
+        while (itemIterator.hasNext()){
+            Item item =itemIterator.next();
+            sum += item.getCost();
+            if (sum<=getTotalMoney()){
+                System.out.println("可進行的開銷為："+item.getItemName()+"，剩餘金錢："+(getTotalMoney()-sum)+"元");
+            }else if (sum>getTotalMoney()){
+                System.out.println("無可進行開銷");
+                break;
+            }else {
+                System.out.println("無其他可進行開銷！");
+                break;
+            }
+        }
+
     }
 
 }
