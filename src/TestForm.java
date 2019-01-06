@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.*;
 import java.util.Iterator;
 
 public class TestForm extends JFrame {
@@ -33,7 +32,7 @@ public class TestForm extends JFrame {
     public JTextField ItemMoneyText;
 
     public TestForm() {
-        super("Test");
+        super("MoneyManageSystem");
         setContentPane(Panel1);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
@@ -58,7 +57,7 @@ public class TestForm extends JFrame {
         }
     }
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public static void main(String[] args) {
         TestForm testForm = new TestForm();
         ManageSystem moneyManage = new MoneyManage();
 
@@ -139,7 +138,7 @@ public class TestForm extends JFrame {
         testForm.OutputButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                moneyManage.InformationOutput(((MoneyManage) moneyManage).getUserName(),((MoneyManage) moneyManage).getTotalMoney());
+                moneyManage.InformationOutput(((MoneyManage) moneyManage).getUserName());
             }
         });
     }

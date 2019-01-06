@@ -1,8 +1,7 @@
-import java.util.Scanner;
 
 abstract class ManageSystem {
 
-    final void InformationOutput(String userName,Double totalMoney){
+    final void InformationOutput(String userName){
         System.out.println("-----------用戶"+userName+"的規劃表如下----------");
         output();
     }
