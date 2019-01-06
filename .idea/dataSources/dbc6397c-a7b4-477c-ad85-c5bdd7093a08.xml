@@ -904,7 +904,7 @@
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
     <table id="227" parent="4" name="userinitialinformation"/>
-    <column id="228" parent="227" name="username">
+    <column id="228" parent="227" name="userName">
       <Position>1</Position>
       <DataType>varchar(128)|0s</DataType>
       <NotNull>1</NotNull>

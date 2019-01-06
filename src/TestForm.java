@@ -9,10 +9,7 @@ import javax.swing.text.Document;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Observer;
 
 public class TestForm extends JFrame {
@@ -26,7 +23,7 @@ public class TestForm extends JFrame {
     private JTextField TotalMoneyText;
     private JLabel ItemNameLabel;
     private JTextField ItemNameText;
-    private JButton ItemNameButton;
+    private JButton ItemOutputButton;
     private JRadioButton CategoryRadioButton1;
     private JRadioButton CategoryRadioButton2;
     private JRadioButton CategoryRadioButton3;
@@ -40,6 +37,7 @@ public class TestForm extends JFrame {
     private JPanel Panel3;
     private JLabel InitialInformantionOutputLabel;
     private JLabel ItemOutputLabel;
+    public JButton ConfirmButton;
     private String userName;
     private double TotalMoney;
 
@@ -99,8 +97,9 @@ public class TestForm extends JFrame {
                         statement.executeUpdate(sql);
                         //關閉資料庫，保證只能存入一次
                         statement.close();
-                        connection.close();
+                        //connection.close();
                     } catch (SQLException e1) {
+                        System.out.println("只能輸入一次姓名和總金額！");
                         e1.printStackTrace();
                     }
 
@@ -108,7 +107,13 @@ public class TestForm extends JFrame {
                 }
             }
         });
-
+        /*String sql = "SELECT userName,userMoney FROM userinitialinformation";
+        ResultSet rs = statement.executeQuery(sql);
+        while (rs.next()){
+            String name = rs.getString("userName");
+            double money = rs.getDouble("userMoney");
+            System.out.println("name:"+name+" money:"+money);
+        }*///读取数据模板
 
     }
 
