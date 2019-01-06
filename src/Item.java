@@ -43,17 +43,7 @@ public class Item implements Comparable{
         this.priority = priority;
     }
 
-    /*@Override
-    public boolean equals(Object obj) {
-       System.out.println(this +"------equal------"+obj);
-       if (obj instanceof Item){
-           Item item = (Item) obj;
-           return this.category==item.category&&this.priority==item.priority;
-       }else {
-           return false;
-       }
-    }*/
-
+    //重寫比較
     @Override
     public int compareTo(Object o) {
 
