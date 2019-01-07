@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 
 public class TimeForm {
@@ -45,6 +46,10 @@ public class TimeForm {
         TimeForm timeForm = new TimeForm();
         ManageSystem timeMange = new TimeManage();
 
+        //將時間format到小數點后兩位
+        DecimalFormat df = new DecimalFormat("0.00");
+
+        //實作計算時間按鈕
         timeForm.InitialInformationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -60,9 +65,11 @@ public class TimeForm {
                         e1.printStackTrace();
                     }
                     timeMange.inputInitialInfo(timeForm.NameText.getText(),((TimeManage) timeMange).calculateTotalTime(((TimeManage) timeMange).getOverTime(),((TimeManage) timeMange).getBeginTime()));
-                    timeForm.InitialInformationOutputLabel.setText("您的姓名為："+((TimeManage) timeMange).getUserName()+"，您的規劃總時間為："+((TimeManage) timeMange).getTotalTime()+"小時");
+                    timeForm.InitialInformationOutputLabel.setText("您的姓名為："+((TimeManage) timeMange).getUserName()+"，您的規劃總時間為："+df.format(((TimeManage) timeMange).getTotalTime())+"小時");
                 }
             }
         });
+
+        //實作item按鈕
     }
 }

@@ -1,8 +1,6 @@
-import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.SimpleTimeZone;
 
 public class TimeManage extends ManageSystem {
     private String userName;
@@ -54,8 +52,8 @@ public class TimeManage extends ManageSystem {
         this.overTime = overTime;
     }
 
+    //計算時間差
     public double calculateTotalTime(Date beginTime,Date overTime){
-        DecimalFormat df = new DecimalFormat("0.00");
         //System.out.println("結束時間getTime:"+overTime.getTime()+"開始時間getTime："+beginTime.getTime());
         double x = ((double)(beginTime.getTime())-(double)(overTime.getTime()))/(60*60*1000);
         return x;
