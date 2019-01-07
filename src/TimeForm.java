@@ -58,9 +58,9 @@ public class TimeForm {
                     timeForm.InitialInformationOutputLabel.setText("您还有信息未输入！请重新输入！");
                 }else {
                     try {
-                        ((TimeManage) timeMange).setBeginTime(((TimeManage) timeMange).StrToData(timeForm.BeginTimeText.getText()));
+                        ((TimeManage) timeMange).setBeginTime(((TimeManage) timeMange).StrToDate(timeForm.BeginTimeText.getText()));
                         //System.out.println("開始時間為："+((TimeManage) timeMange).getBeginTime());
-                        ((TimeManage) timeMange).setOverTime(((TimeManage) timeMange).StrToData(timeForm.OverTimeText.getText()));
+                        ((TimeManage) timeMange).setOverTime(((TimeManage) timeMange).StrToDate(timeForm.OverTimeText.getText()));
                         //System.out.println("結束時間為"+((TimeManage) timeMange).getOverTime());
                     } catch (ParseException e1) {
                         e1.printStackTrace();
@@ -120,6 +120,14 @@ public class TimeForm {
                     System.out.println("活動名稱："+timeItem.getItemName()+",所需時間："+timeItem.getCost()+"小時，活動種類："+timeItem.backTimeCategory()+"，活動優先度："+
                     timeItem.backTimePriority());
                 }
+            }
+        });
+
+        //實作output按鈕
+        timeForm.OutputButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
     }

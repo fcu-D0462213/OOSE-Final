@@ -11,7 +11,7 @@ public class TimeManage extends ManageSystem {
     TreeSet<Item> timeItems = new TreeSet<Item>();
 
     //String转日期
-    public Date StrToData(String str) throws ParseException {
+    public Date StrToDate(String str) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
         Date date = null;
         date = format.parse(str);
@@ -19,6 +19,12 @@ public class TimeManage extends ManageSystem {
     }
 
     //日期转String
+    public String DateToStr(Date data){
+
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        String str = format.format(data);
+        return str;
+    }
 
     public double getTotalTime() {
         return totalTime;
