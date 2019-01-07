@@ -29,11 +29,15 @@ public class TimeForm {
     private JButton ConfirmButton;
     private JButton FinishButton;
 
-    public static void main(String[] args) {
+    public TimeForm() {
         JFrame frame = new JFrame("TimeForm");
-        frame.setContentPane(new TimeForm().Panel1);
+        frame.setContentPane(Panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        TimeForm timeForm = new TimeForm();
     }
 }

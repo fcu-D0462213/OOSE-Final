@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="TimeForm">
-  <grid id="27dc6" binding="Panel1" layout-manager="GridLayoutManager" row-count="11" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="Panel1" layout-manager="GridLayoutManager" row-count="11" column-count="5" same-size-horizontally="true" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="20" width="794" height="423"/>
@@ -33,7 +33,7 @@
       </vspacer>
       <component id="c31fa" class="javax.swing.JLabel" binding="NameLabel">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="姓名"/>
@@ -49,7 +49,7 @@
       </component>
       <component id="f61a" class="javax.swing.JLabel" binding="BeginTimeLabel">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="開始時間"/>
@@ -65,7 +65,7 @@
       </component>
       <component id="c8533" class="javax.swing.JLabel" binding="OverTimeLabel">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="結束時間"/>
@@ -97,7 +97,7 @@
       </component>
       <component id="493dc" class="javax.swing.JLabel" binding="ItemNameLabel">
         <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="輸入活動名稱"/>
@@ -113,7 +113,7 @@
       </component>
       <component id="4cd4e" class="javax.swing.JLabel" binding="ItemCostLabel">
         <constraints>
-          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="輸入活動所需時間"/>
@@ -129,7 +129,7 @@
       </component>
       <component id="89cdf" class="javax.swing.JLabel" binding="ItemCategoryLabel">
         <constraints>
-          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="選擇活動類別"/>
@@ -161,7 +161,7 @@
       </component>
       <component id="9bf27" class="javax.swing.JLabel" binding="ItemPriorityLabel">
         <constraints>
-          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="選擇活動優先度"/>
