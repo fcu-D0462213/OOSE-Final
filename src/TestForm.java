@@ -38,24 +38,6 @@ public class TestForm extends JFrame {
         pack();
         setVisible(true);
     }
-    //選擇RadioButton
-    public JRadioButton selectRadioButton(JRadioButton rb1,JRadioButton rb2,JRadioButton rb3){
-        if (rb1.isSelected()){
-            return rb1;
-        }else if (rb2.isSelected()){
-            return rb2;
-        }else {
-            return rb3;
-        }
-    }
-    //判斷RadioButton是否被選中
-    public boolean checkRationButton(JRadioButton rb1,JRadioButton rb2,JRadioButton rb3){
-        if ((rb1.isSelected()||rb2.isSelected()||rb3.isSelected())==false){
-            return false;
-        }else {
-            return true;
-        }
-    }
 
     public static void main(String[] args) {
         TestForm testForm = new TestForm();
@@ -86,16 +68,16 @@ public class TestForm extends JFrame {
                 }else if (testForm.ItemMoneyText.getText().isEmpty()){
                     testForm.ItemOutputLabel.setText("開銷金額未輸入！");
                     //System.out.println("開銷金額未輸入！");
-                }else if (testForm.checkRationButton(testForm.CategoryRadioButton1,testForm.CategoryRadioButton2,testForm.CategoryRadioButton3)==false){
+                }else if (RationButton.checkRationButton(testForm.CategoryRadioButton1,testForm.CategoryRadioButton2,testForm.CategoryRadioButton3)==false){
                     testForm.ItemOutputLabel.setText("開銷種類未選擇！");
                     //System.out.println("開銷種類未選擇！");
-                }else if (testForm.checkRationButton(testForm.PriorityRadioButton1,testForm.PriorityRadioButton2,testForm.PriorityRadioButton3)==false){
+                }else if (RationButton.checkRationButton(testForm.PriorityRadioButton1,testForm.PriorityRadioButton2,testForm.PriorityRadioButton3)==false){
                     testForm.ItemOutputLabel.setText("開銷優先度未選擇！");
                     //System.out.println("開銷優先度未選擇！");
                 }else {
                     testForm.ItemOutputLabel.setText("您輸入的開銷名稱為："+testForm.ItemNameText.getText()+"，該物品開銷為："+testForm.ItemMoneyText.getText()
-                            +"元，該物品的種類為："+testForm.selectRadioButton(testForm.CategoryRadioButton1,testForm.CategoryRadioButton2,testForm.CategoryRadioButton3).getText()
-                            +", 該物品的優先度為："+testForm.selectRadioButton(testForm.PriorityRadioButton1,testForm.PriorityRadioButton2,testForm.PriorityRadioButton3).getText());
+                            +"元，該物品的種類為："+RationButton.selectRadioButton(testForm.CategoryRadioButton1,testForm.CategoryRadioButton2,testForm.CategoryRadioButton3).getText()
+                            +", 該物品的優先度為："+RationButton.selectRadioButton(testForm.PriorityRadioButton1,testForm.PriorityRadioButton2,testForm.PriorityRadioButton3).getText());
                 }
             }
         });
@@ -105,14 +87,14 @@ public class TestForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (testForm.ItemNameText.getText().isEmpty()||testForm.ItemMoneyText.getText().isEmpty()||
-                        (testForm.checkRationButton(testForm.CategoryRadioButton1,testForm.CategoryRadioButton2,testForm.CategoryRadioButton3)==false)
-                        || (testForm.checkRationButton(testForm.PriorityRadioButton1,testForm.PriorityRadioButton2,testForm.PriorityRadioButton3)==false)){
+                        (RationButton.checkRationButton(testForm.CategoryRadioButton1,testForm.CategoryRadioButton2,testForm.CategoryRadioButton3)==false)
+                        || (RationButton.checkRationButton(testForm.PriorityRadioButton1,testForm.PriorityRadioButton2,testForm.PriorityRadioButton3)==false)){
                     testForm.ItemOutputLabel.setText("您還有信息未輸入！");
                     //System.out.println("您還有信息未輸入！");
                 }else {
                     moneyManage.addItem(testForm.ItemNameText.getText(),Double.parseDouble(testForm.ItemMoneyText.getText()),
-                            moneyManage.chooseCategory(testForm.selectRadioButton(testForm.CategoryRadioButton1,testForm.CategoryRadioButton2,testForm.CategoryRadioButton3).getText()),
-                            moneyManage.choosePriority(testForm.selectRadioButton(testForm.PriorityRadioButton1,testForm.PriorityRadioButton2,testForm.PriorityRadioButton3).getText()));
+                            moneyManage.chooseCategory(RationButton.selectRadioButton(testForm.CategoryRadioButton1,testForm.CategoryRadioButton2,testForm.CategoryRadioButton3).getText()),
+                            moneyManage.choosePriority(RationButton.selectRadioButton(testForm.PriorityRadioButton1,testForm.PriorityRadioButton2,testForm.PriorityRadioButton3).getText()));
                 }
             }
         });

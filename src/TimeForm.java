@@ -17,9 +17,9 @@ public class TimeForm {
     private JButton InitialInformationButton;
     private JLabel InitialInformationOutputLabel;
     private JLabel ItemNameLabel;
-    private JTextField ItemNameOutputText;
+    private JTextField ItemNameText;
     private JLabel ItemCostLabel;
-    private JTextField ItemCostOutputText;
+    private JTextField ItemCostText;
     private JLabel ItemCategoryLabel;
     private JRadioButton CategoryRadioButton1;
     private JRadioButton CategoryRadioButton2;
@@ -70,6 +70,16 @@ public class TimeForm {
             }
         });
 
-        //實作item按鈕
+        /*//實作item按鈕
+        timeForm.ItemOutputButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (timeForm.ItemNameText.getText().isEmpty()){
+                    timeForm.ItemOutputLabel.setText("活動名稱未輸入！");
+                }else if (timeForm.ItemCostText.getText().isEmpty()){
+                    timeForm.ItemOutputLabel.setText("活動所需時間未輸入！");
+                }else if ()
+            }
+        });*/
     }
 }

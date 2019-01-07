@@ -103,7 +103,7 @@
           <text value="輸入活動名稱"/>
         </properties>
       </component>
-      <component id="5e28d" class="javax.swing.JTextField" binding="ItemNameOutputText">
+      <component id="5e28d" class="javax.swing.JTextField" binding="ItemNameText">
         <constraints>
           <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -119,7 +119,7 @@
           <text value="輸入活動所需時間"/>
         </properties>
       </component>
-      <component id="3b401" class="javax.swing.JTextField" binding="ItemCostOutputText">
+      <component id="3b401" class="javax.swing.JTextField" binding="ItemCostText">
         <constraints>
           <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
