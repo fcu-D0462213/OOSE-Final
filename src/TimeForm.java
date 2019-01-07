@@ -70,7 +70,7 @@ public class TimeForm {
             }
         });
 
-        /*//實作item按鈕
+        //實作item按鈕
         timeForm.ItemOutputButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -78,8 +78,16 @@ public class TimeForm {
                     timeForm.ItemOutputLabel.setText("活動名稱未輸入！");
                 }else if (timeForm.ItemCostText.getText().isEmpty()){
                     timeForm.ItemOutputLabel.setText("活動所需時間未輸入！");
-                }else if ()
+                }else if (RationButton.checkRationButton(timeForm.CategoryRadioButton1,timeForm.CategoryRadioButton2,timeForm.CategoryRadioButton3)==false){
+                    timeForm.ItemOutputLabel.setText("活動種類未選擇！");
+                }else if (RationButton.checkRationButton(timeForm.PriorityRadioButton1,timeForm.PriorityRadioButton2,timeForm.PriorityRadioButton3)==false){
+                    timeForm.ItemOutputLabel.setText("活動優先度未選擇！");
+                }else {
+                    timeForm.ItemOutputLabel.setText("您輸入的活動名稱為："+timeForm.ItemNameText.getText()+"，該活動所需時間為："+timeForm.ItemCostText.getText()
+                    +"小時，該活動種類為："+RationButton.selectRadioButton(timeForm.CategoryRadioButton1,timeForm.CategoryRadioButton2,timeForm.CategoryRadioButton3).getText()
+                    +"，該活動的優先度為："+RationButton.selectRadioButton(timeForm.PriorityRadioButton1,timeForm.PriorityRadioButton2,timeForm.PriorityRadioButton3).getText());
+                }
             }
-        });*/
+        });
     }
 }
