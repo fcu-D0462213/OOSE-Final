@@ -1,4 +1,7 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 public class TimeForm {
     private JPanel Panel1;
@@ -28,6 +31,7 @@ public class TimeForm {
     private JLabel ItemOutputLabel;
     private JButton ConfirmButton;
     private JButton FinishButton;
+    private JLabel TimeExampleLabel;
 
     public TimeForm() {
         JFrame frame = new JFrame("TimeForm");
@@ -39,5 +43,26 @@ public class TimeForm {
 
     public static void main(String[] args) {
         TimeForm timeForm = new TimeForm();
+        ManageSystem timeMange = new TimeManage();
+
+        timeForm.InitialInformationButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (timeForm.NameText.getText().isEmpty()||timeForm.BeginTimeText.getText().isEmpty()||timeForm.OverTimeText.getText().isEmpty()){
+                    timeForm.InitialInformationOutputLabel.setText("您还有信息未输入！请重新输入！");
+                }else {
+                    try {
+                        ((TimeManage) timeMange).setBeginTime(((TimeManage) timeMange).StrToData(timeForm.BeginTimeText.getText()));
+                        System.out.println("開始時間為："+((TimeManage) timeMange).getBeginTime());
+                        ((TimeManage) timeMange).setOverTime(((TimeManage) timeMange).StrToData(timeForm.OverTimeText.getText()));
+                        System.out.println("結束時間為"+((TimeManage) timeMange).getOverTime());
+                    } catch (ParseException e1) {
+                        e1.printStackTrace();
+                    }
+                    timeMange.inputInitialInfo(timeForm.NameText.getText(),((TimeManage) timeMange).calculateTotalTime(((TimeManage) timeMange).getOverTime(),((TimeManage) timeMange).getBeginTime()));
+                    timeForm.InitialInformationOutputLabel.setText("您的姓名為："+((TimeManage) timeMange).getUserName()+"，您的規劃總時間為："+((TimeManage) timeMange).getTotalTime()+"小時");
+                }
+            }
+        });
     }
 }
