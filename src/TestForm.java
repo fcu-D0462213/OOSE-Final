@@ -109,8 +109,8 @@ public class TestForm extends JFrame {
                    Iterator<Item> itemIterator = ((MoneyManage) moneyManage).moneyItems.iterator();
                    while (itemIterator.hasNext()) {
                        Item moneyItem = itemIterator.next();
-                       System.out.println("開銷名稱：" + moneyItem.getItemName() + ",所需金錢:" + moneyItem.getCost() + "元,開銷種類:" + moneyItem.backCategory() + ",開銷優先度:" +
-                               moneyItem.backPriority());
+                       System.out.println("開銷名稱：" + moneyItem.getItemName() + ",所需金錢:" + moneyItem.getCost() + "元,開銷種類:" + moneyItem.backMoneyCategory() + ",開銷優先度:" +
+                               moneyItem.backMoneyPriority());
                    }
 
            }

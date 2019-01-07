@@ -1,14 +1,14 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TreeSet;
 
 public class TimeManage extends ManageSystem {
     private String userName;
-    private String sbeginTime;
-    private String soverTime;
     private Date beginTime;
     private Date overTime;
     private double totalTime;
+    TreeSet<Item> timeItems = new TreeSet<Item>();
 
     //String转日期
     public Date StrToData(String str) throws ParseException {
@@ -67,17 +67,34 @@ public class TimeManage extends ManageSystem {
 
     @Override
     public int chooseCategory(String category) {
-        return 0;
+        int virtualCategory;
+        if (category.equals("承諾時間")){
+            virtualCategory = 3;
+        }else if (category.equals("維護時間")){
+            virtualCategory = 2;
+        }else {
+            virtualCategory = 1;
+        }
+        return virtualCategory;
     }
 
     @Override
     public int choosePriority(String priority) {
-        return 0;
+        int virtualPriority;
+        if (priority.equals("緊急")) {
+            virtualPriority = 3;
+        }else if (priority.equals("重要")){
+            virtualPriority = 2;
+        }else {
+            virtualPriority = 1;
+        }
+        return virtualPriority;
     }
 
     @Override
     public void addItem(String itemName, double cost, int category, int priority) {
-
+        Item item = new Item(itemName,cost,category,priority);
+        timeItems.add(item);
     }
 
 
