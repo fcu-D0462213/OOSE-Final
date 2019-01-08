@@ -110,9 +110,9 @@ public class MoneyForm extends JFrame {
                    System.out.println("--------當前用戶信息----------");
                    System.out.println("姓名:"+((MoneyManage) moneyManage).getUserName()+",金錢總量:"+((MoneyManage) moneyManage).getTotalMoney()+"元");
                    System.out.println("--------規劃開銷項目---------");
-                   Iterator<ItemMoney> itemIterator = ((MoneyManage) moneyManage).moneyItems.iterator();
+                   Iterator<Item> itemIterator = ((MoneyManage) moneyManage).moneyItems.iterator();
                    while (itemIterator.hasNext()) {
-                       ItemMoney moneyItem = itemIterator.next();
+                       Item moneyItem = itemIterator.next();
                        System.out.println("開銷名稱：" + moneyItem.getItemName() + ",所需金錢:" + moneyItem.getCost() + "元,開銷種類:" + moneyItem.backMoneyCategory() + ",開銷優先度:" +
                                moneyItem.backMoneyPriority());
                    }

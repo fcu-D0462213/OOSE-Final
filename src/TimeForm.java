@@ -111,11 +111,9 @@ public class TimeForm {
                         ||RationButton.checkRationButton(timeForm.PriorityRadioButton1,timeForm.PriorityRadioButton2,timeForm.PriorityRadioButton3)==false){
                     JOptionPane.showMessageDialog(timeForm.Panel1,"您還有信息未輸入");
                 }else {
-
                     timeMange.addItem(timeForm.ItemNameText.getText(),Double.parseDouble(timeForm.ItemCostText.getText()),
                             timeMange.chooseCategory(RationButton.selectRadioButton(timeForm.CategoryRadioButton1,timeForm.CategoryRadioButton2,timeForm.CategoryRadioButton3).getText()),
-                            timeMange.choosePriority(RationButton.selectRadioButton(timeForm.PriorityRadioButton1,timeForm.PriorityRadioButton2,timeForm.PriorityRadioButton3).getText()),
-                            timeForm.BeginTimeText.getText(),timeForm.OverTimeText.getText());
+                            timeMange.choosePriority(RationButton.selectRadioButton(timeForm.PriorityRadioButton1,timeForm.PriorityRadioButton2,timeForm.PriorityRadioButton3).getText()));
                     JOptionPane.showMessageDialog(timeForm.Panel1,"已確認");
                 }
             }
@@ -129,10 +127,9 @@ public class TimeForm {
                 System.out.println("--------當前用戶信息----------");
                 System.out.println("姓名:"+((TimeManage) timeMange).getUserName()+",計劃總時間:"+timeMange.getTotalTime()+"小時");
                 System.out.println("--------規劃活動列表---------");
-                Iterator<ItemTime> itemIterator =  timeMange.timeItems.iterator();
-                //System.out.println("1111");
+                Iterator<Item> itemIterator =  timeMange.timeItems.iterator();
                 while (itemIterator.hasNext()){
-                    ItemTime timeItem = itemIterator.next();
+                    Item timeItem = itemIterator.next();
                     System.out.println("活動名稱："+timeItem.getItemName()+",所需時間："+timeItem.getCost()+"小時，活動種類："+timeItem.backTimeCategory()+"，活動優先度："+
                     timeItem.backTimePriority());
                 }
