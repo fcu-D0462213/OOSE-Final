@@ -76,7 +76,7 @@ public class TimeForm {
                     }
                     timeMange.inputInitialInfo(timeForm.NameText.getText(),timeMange.calculateTotalTime(timeMange.getOverTime(),timeMange.getBeginTime()));
                     JOptionPane.showMessageDialog(timeForm.Panel1,"OK!");
-                    timeForm.InitialInformationOutputLabel.setText("   HI："+timeMange.getUserName()+"，您的規劃總時間為："+df.format(timeMange.getTotalTime())+"小時");
+                    timeForm.InitialInformationOutputLabel.setText("                        HI："+timeMange.getUserName()+"，您的規劃總時間為："+df.format(timeMange.getTotalTime())+"小時");
                 }
             }
         });
