@@ -48,7 +48,7 @@ public class TestForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (testForm.NameText.getText().isEmpty()||testForm.TotalMoneyText.getText().isEmpty()){
-                    testForm.InitialInformationOutputLabel.setText("您有信息還未輸入！請重新輸入！");
+                    JOptionPane.showMessageDialog(testForm.Panel1,"您有信息還未輸入！請重新輸入！");
                     //System.out.println("您有信息還未輸入！請重新輸入！");
                 }else {
                     moneyManage.inputInitialInfo(testForm.NameText.getText(),Double.parseDouble(testForm.TotalMoneyText.getText()));
@@ -63,16 +63,16 @@ public class TestForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (testForm.ItemNameText.getText().isEmpty()){
-                    testForm.ItemOutputLabel.setText("開銷名稱未輸入！");
+                    JOptionPane.showMessageDialog(testForm.Panel1,"開銷名稱未輸入！");
                     //System.out.println("開銷名稱未輸入！");
                 }else if (testForm.ItemMoneyText.getText().isEmpty()){
-                    testForm.ItemOutputLabel.setText("開銷金額未輸入！");
+                    JOptionPane.showMessageDialog(testForm.Panel1,"開銷金額未輸入！");
                     //System.out.println("開銷金額未輸入！");
                 }else if (RationButton.checkRationButton(testForm.CategoryRadioButton1,testForm.CategoryRadioButton2,testForm.CategoryRadioButton3)==false){
-                    testForm.ItemOutputLabel.setText("開銷種類未選擇！");
+                    JOptionPane.showMessageDialog(testForm.Panel1,"開銷種類未選擇！");
                     //System.out.println("開銷種類未選擇！");
                 }else if (RationButton.checkRationButton(testForm.PriorityRadioButton1,testForm.PriorityRadioButton2,testForm.PriorityRadioButton3)==false){
-                    testForm.ItemOutputLabel.setText("開銷優先度未選擇！");
+                    JOptionPane.showMessageDialog(testForm.Panel1,"開銷優先度未選擇！");
                     //System.out.println("開銷優先度未選擇！");
                 }else {
                     testForm.ItemOutputLabel.setText("您輸入的開銷名稱為："+testForm.ItemNameText.getText()+"，該物品開銷為："+testForm.ItemMoneyText.getText()
@@ -89,7 +89,7 @@ public class TestForm extends JFrame {
                 if (testForm.ItemNameText.getText().isEmpty()||testForm.ItemMoneyText.getText().isEmpty()||
                         (RationButton.checkRationButton(testForm.CategoryRadioButton1,testForm.CategoryRadioButton2,testForm.CategoryRadioButton3)==false)
                         || (RationButton.checkRationButton(testForm.PriorityRadioButton1,testForm.PriorityRadioButton2,testForm.PriorityRadioButton3)==false)){
-                    testForm.ItemOutputLabel.setText("您還有信息未輸入！");
+                    JOptionPane.showMessageDialog(testForm.Panel1,"您還有信息未輸入！");
                     //System.out.println("您還有信息未輸入！");
                 }else {
                     moneyManage.addItem(testForm.ItemNameText.getText(),Double.parseDouble(testForm.ItemMoneyText.getText()),
@@ -106,9 +106,9 @@ public class TestForm extends JFrame {
                    System.out.println("--------當前用戶信息----------");
                    System.out.println("姓名:"+((MoneyManage) moneyManage).getUserName()+",金錢總量:"+((MoneyManage) moneyManage).getTotalMoney()+"元");
                    System.out.println("--------規劃開銷項目---------");
-                   Iterator<Item> itemIterator = ((MoneyManage) moneyManage).moneyItems.iterator();
+                   Iterator<ItemMoney> itemIterator = ((MoneyManage) moneyManage).moneyItems.iterator();
                    while (itemIterator.hasNext()) {
-                       Item moneyItem = itemIterator.next();
+                       ItemMoney moneyItem = itemIterator.next();
                        System.out.println("開銷名稱：" + moneyItem.getItemName() + ",所需金錢:" + moneyItem.getCost() + "元,開銷種類:" + moneyItem.backMoneyCategory() + ",開銷優先度:" +
                                moneyItem.backMoneyPriority());
                    }

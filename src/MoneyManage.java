@@ -3,7 +3,7 @@ import java.util.TreeSet;
 public class MoneyManage extends ManageSystem {
     private String userName=null;
     private double totalMoney;
-    TreeSet<Item> moneyItems =new TreeSet<Item>();
+    TreeSet<ItemMoney> moneyItems =new TreeSet<ItemMoney>();
 
     public String getUserName() {
         return userName;
@@ -56,16 +56,16 @@ public class MoneyManage extends ManageSystem {
 
     @Override
     public void addItem(String itemName, double cost, int category, int priority) {
-        Item item = new Item(itemName,cost,category,priority);
+        ItemMoney item = new ItemMoney(itemName,cost,category,priority);
         moneyItems.add(item);
     }
 
     @Override
     public void output() {
         double sum = 0;
-        Iterator<Item> itemIterator = moneyItems.iterator();
+        Iterator<ItemMoney> itemIterator = moneyItems.iterator();
         while (itemIterator.hasNext()){
-            Item item =itemIterator.next();
+            ItemMoney item =itemIterator.next();
             sum += item.getCost();
             if (sum<=getTotalMoney()){
                 System.out.println("可進行的開銷為："+item.getItemName()+"，剩餘金錢："+(getTotalMoney()-sum)+"元");

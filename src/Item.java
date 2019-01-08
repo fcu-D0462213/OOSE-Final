@@ -27,45 +27,9 @@ public class Item implements Comparable{
         return priority;
     }
 
-    public String backMoneyCategory(){
-        if (getCategory()==3){
-            return "固定必要開銷";
-        }else if (getCategory()==2){
-            return "靈活必要開銷";
-        }else {
-            return "自由支配開銷";
-        }
-    }
 
-    public String backTimeCategory(){
-        if (getCategory()==3){
-            return "承諾時間";
-        }else if (getCategory()==2){
-            return "維護時間";
-        }else {
-            return "自由支配時間";
-        }
-    }
 
-    public String backMoneyPriority(){
-        if (getPriority()==3){
-            return "重要";
-        }else if (getPriority()==2){
-            return "次要";
-        }else {
-            return "不重要";
-        }
-    }
 
-    public String backTimePriority(){
-        if (getPriority()==3){
-            return "緊急";
-        }else if (getPriority()==2){
-            return "重要";
-        }else {
-            return "不重要";
-        }
-    }
 
     //重寫比較
     @Override

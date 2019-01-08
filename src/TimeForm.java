@@ -35,6 +35,8 @@ public class TimeForm {
     private JButton FinishButton;
     private JLabel TimeExampleLabel;
 
+
+
     public TimeForm() {
         JFrame frame = new JFrame("TimeForm");
         frame.setContentPane(Panel1);
@@ -45,7 +47,7 @@ public class TimeForm {
 
     public static void main(String[] args) {
         TimeForm timeForm = new TimeForm();
-        ManageSystem timeMange = new TimeManage();
+        TimeManage timeMange = new TimeManage();
 
         //將時間format到小數點后兩位
         DecimalFormat df = new DecimalFormat("0.00");
@@ -54,19 +56,27 @@ public class TimeForm {
         timeForm.InitialInformationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (timeForm.NameText.getText().isEmpty()||timeForm.BeginTimeText.getText().isEmpty()||timeForm.OverTimeText.getText().isEmpty()){
-                    timeForm.InitialInformationOutputLabel.setText("您还有信息未输入！请重新输入！");
-                }else {
+                if (timeForm.NameText.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(timeForm.Panel1,"姓名未輸入！");
+                }
+                else if(timeForm.BeginTimeText.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(timeForm.Panel1,"開始時間未輸入！");
+                }
+                else if(timeForm.OverTimeText.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(timeForm.Panel1,"結束時間未輸入！");
+                }
+                else {
                     try {
-                        ((TimeManage) timeMange).setBeginTime(((TimeManage) timeMange).StrToDate(timeForm.BeginTimeText.getText()));
+                        timeMange.setBeginTime(timeMange.StrToDate(timeForm.BeginTimeText.getText()));
                         //System.out.println("開始時間為："+((TimeManage) timeMange).getBeginTime());
-                        ((TimeManage) timeMange).setOverTime(((TimeManage) timeMange).StrToDate(timeForm.OverTimeText.getText()));
+                        timeMange.setOverTime(timeMange.StrToDate(timeForm.OverTimeText.getText()));
                         //System.out.println("結束時間為"+((TimeManage) timeMange).getOverTime());
                     } catch (ParseException e1) {
                         e1.printStackTrace();
                     }
-                    timeMange.inputInitialInfo(timeForm.NameText.getText(),((TimeManage) timeMange).calculateTotalTime(((TimeManage) timeMange).getOverTime(),((TimeManage) timeMange).getBeginTime()));
-                    timeForm.InitialInformationOutputLabel.setText("您的姓名為："+((TimeManage) timeMange).getUserName()+"，您的規劃總時間為："+df.format(((TimeManage) timeMange).getTotalTime())+"小時");
+                    timeMange.inputInitialInfo(timeForm.NameText.getText(),timeMange.calculateTotalTime(timeMange.getOverTime(),timeMange.getBeginTime()));
+                    JOptionPane.showMessageDialog(timeForm.Panel1,"OK!");
+                    timeForm.InitialInformationOutputLabel.setText("   HI："+timeMange.getUserName()+"，您的規劃總時間為："+df.format(timeMange.getTotalTime())+"小時");
                 }
             }
         });
@@ -76,14 +86,15 @@ public class TimeForm {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (timeForm.ItemNameText.getText().isEmpty()){
-                    timeForm.ItemOutputLabel.setText("活動名稱未輸入！");
+                    JOptionPane.showMessageDialog(timeForm.Panel1,"活動名稱未輸入！");
                 }else if (timeForm.ItemCostText.getText().isEmpty()){
-                    timeForm.ItemOutputLabel.setText("活動所需時間未輸入！");
+                    JOptionPane.showMessageDialog(timeForm.Panel1,"活動所需時間未輸入！");
                 }else if (RationButton.checkRationButton(timeForm.CategoryRadioButton1,timeForm.CategoryRadioButton2,timeForm.CategoryRadioButton3)==false){
-                    timeForm.ItemOutputLabel.setText("活動種類未選擇！");
+                    JOptionPane.showMessageDialog(timeForm.Panel1,"活動種類未選擇！");
                 }else if (RationButton.checkRationButton(timeForm.PriorityRadioButton1,timeForm.PriorityRadioButton2,timeForm.PriorityRadioButton3)==false){
-                    timeForm.ItemOutputLabel.setText("活動優先度未選擇！");
+                    JOptionPane.showMessageDialog(timeForm.Panel1,"活動優先度未選擇！");
                 }else {
+                    JOptionPane.showMessageDialog(timeForm.Panel1,"OK！");
                     timeForm.ItemOutputLabel.setText("您輸入的活動名稱為："+timeForm.ItemNameText.getText()+"，該活動所需時間為："+timeForm.ItemCostText.getText()
                     +"小時，該活動種類為："+RationButton.selectRadioButton(timeForm.CategoryRadioButton1,timeForm.CategoryRadioButton2,timeForm.CategoryRadioButton3).getText()
                     +"，該活動的優先度為："+RationButton.selectRadioButton(timeForm.PriorityRadioButton1,timeForm.PriorityRadioButton2,timeForm.PriorityRadioButton3).getText());
@@ -98,11 +109,14 @@ public class TimeForm {
                 if (timeForm.ItemNameText.getText().isEmpty()||timeForm.ItemCostText.getText().isEmpty()||
                         RationButton.checkRationButton(timeForm.CategoryRadioButton1,timeForm.CategoryRadioButton2,timeForm.CategoryRadioButton3)==false
                         ||RationButton.checkRationButton(timeForm.PriorityRadioButton1,timeForm.PriorityRadioButton2,timeForm.PriorityRadioButton3)==false){
-                    timeForm.ItemOutputLabel.setText("您還有信息未輸入");
+                    JOptionPane.showMessageDialog(timeForm.Panel1,"您還有信息未輸入");
                 }else {
+
                     timeMange.addItem(timeForm.ItemNameText.getText(),Double.parseDouble(timeForm.ItemCostText.getText()),
                             timeMange.chooseCategory(RationButton.selectRadioButton(timeForm.CategoryRadioButton1,timeForm.CategoryRadioButton2,timeForm.CategoryRadioButton3).getText()),
-                            timeMange.choosePriority(RationButton.selectRadioButton(timeForm.PriorityRadioButton1,timeForm.PriorityRadioButton2,timeForm.PriorityRadioButton3).getText()));
+                            timeMange.choosePriority(RationButton.selectRadioButton(timeForm.PriorityRadioButton1,timeForm.PriorityRadioButton2,timeForm.PriorityRadioButton3).getText()),
+                            timeForm.BeginTimeText.getText(),timeForm.OverTimeText.getText());
+                    JOptionPane.showMessageDialog(timeForm.Panel1,"已確認");
                 }
             }
         });
@@ -111,12 +125,14 @@ public class TimeForm {
         timeForm.FinishButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(timeForm.Panel1,"添加完成");
                 System.out.println("--------當前用戶信息----------");
-                System.out.println("姓名:"+((TimeManage) timeMange).getUserName()+",計劃總時間:"+((TimeManage) timeMange).getTotalTime()+"小時");
+                System.out.println("姓名:"+((TimeManage) timeMange).getUserName()+",計劃總時間:"+timeMange.getTotalTime()+"小時");
                 System.out.println("--------規劃活動列表---------");
-                Iterator<Item> itemIterator = ((TimeManage) timeMange).timeItems.iterator();
+                Iterator<ItemTime> itemIterator =  timeMange.timeItems.iterator();
+                //System.out.println("1111");
                 while (itemIterator.hasNext()){
-                    Item timeItem = itemIterator.next();
+                    ItemTime timeItem = itemIterator.next();
                     System.out.println("活動名稱："+timeItem.getItemName()+",所需時間："+timeItem.getCost()+"小時，活動種類："+timeItem.backTimeCategory()+"，活動優先度："+
                     timeItem.backTimePriority());
                 }
@@ -127,8 +143,13 @@ public class TimeForm {
         timeForm.OutputButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(timeForm.Panel1,"成功輸出");
+
+                timeMange.InformationOutput(((TimeManage) timeMange).getUserName());
+
 
             }
         });
     }
 }
+

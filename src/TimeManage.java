@@ -1,6 +1,7 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.TreeSet;
 
 public class TimeManage extends ManageSystem {
@@ -8,7 +9,7 @@ public class TimeManage extends ManageSystem {
     private Date beginTime;
     private Date overTime;
     private double totalTime;
-    TreeSet<Item> timeItems = new TreeSet<Item>();
+    TreeSet<ItemTime> timeItems = new TreeSet<ItemTime>();
 
     //String转日期
     public Date StrToDate(String str) throws ParseException {
@@ -97,15 +98,61 @@ public class TimeManage extends ManageSystem {
         return virtualPriority;
     }
 
-    @Override
-    public void addItem(String itemName, double cost, int category, int priority) {
-        Item item = new Item(itemName,cost,category,priority);
+    public void addItem(String itemName, double cost, int category, int priority,String begin,String over) {
+        ItemTime item = new ItemTime(itemName,cost,category,priority,begin,over);
         timeItems.add(item);
+    }
+
+    public   void addItem(String itemName, double cost, int category, int priority) {
+
     }
 
 
     @Override
     public void output() {
+        double sum = 0.0,remain=0.0;
+        int flag=0;
+        String begin="",over="",tmp="",subbegin="";
+        double b=0.0,o=0.0;
+        Iterator<ItemTime> itemIterator = timeItems.iterator();
+        while(itemIterator.hasNext()){
+            ItemTime item = itemIterator.next();
+            sum += item.getCost();
+            remain = getTotalTime()-sum;
+            if(sum<=getTotalTime()){
+
+                if(flag==0){
+                    System.out.println("可支配時間從 "+item.getBeginTime()+"到"+item.getOverTime()+" 共可支配總時間："+getTotalTime()+"時");
+                    begin=item.getBeginTime(); //第一每段開始
+                    flag=1;
+                }
+                try {
+                    b=((double)(StrToDate(begin).getTime()))/(60*60*1000)+8.0;
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                o = b+item.getCost();
+                if(o<10){
+                    tmp="0"+String.valueOf((int)o);
+                } else {
+                    tmp=String.valueOf((int)o);
+                }
+                subbegin = begin.substring(0,2);
+                over=begin.replaceFirst(subbegin,tmp);
+                System.out.println(begin+"--"+over+"  "+"活動："+item.getItemName()+"  "+"剩餘可支配時間："+remain+"時");
+                begin= over;
+
+            }
+            else if(sum>getTotalTime()){
+                System.out.println("超出支配時間");
+                break;
+            }
+            else {
+                System.out.println("無其他可支配！");
+                break;
+            }
+        }
+
 
     }
 }
